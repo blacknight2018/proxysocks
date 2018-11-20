@@ -173,8 +173,8 @@ public class Main_nio {
                     remoteSocketChannel.configureBlocking(false);
                     System.out.println(System.currentTimeMillis());
                     remoteSocketChannel.connect(new InetSocketAddress(remote_address, remote_port));
-                    remoteSocketChannel.socket().setReceiveBufferSize(1 * 1024);// 设置接收缓存
-                    remoteSocketChannel.socket().setSendBufferSize(1 * 1024);// 设置发送缓存
+                    remoteSocketChannel.socket().setReceiveBufferSize(8 * 1024);// 设置接收缓存
+                    remoteSocketChannel.socket().setSendBufferSize(8 * 1024);// 设置发送缓存
                     remoteSocketChannel.socket().setSoTimeout(0);
                     remoteSocketChannel.socket().setTcpNoDelay(true);
                     remoteSocketChannel.socket().setKeepAlive(true);
@@ -182,7 +182,7 @@ public class Main_nio {
                     Object[] remote_objects = new Object[4];
                     remote_objects[0] = true;
                     remote_objects[1] = false;
-                    remote_objects[2] = ByteBuffer.allocateDirect(1024 * 10);
+                    remote_objects[2] = ByteBuffer.allocateDirect(1024 * 8);
                     remote_objects[3] = key;
                     remoteSelectionKey.attach(remote_objects);
 
@@ -201,8 +201,8 @@ public class Main_nio {
         ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
         SocketChannel socketChannel = serverSocketChannel.accept();
         socketChannel.configureBlocking(false);
-        socketChannel.socket().setReceiveBufferSize(1 * 1024);// 设置接收缓存
-        socketChannel.socket().setSendBufferSize(1 * 1024);// 设置发送缓存
+        socketChannel.socket().setReceiveBufferSize(8 * 1024);// 设置接收缓存
+        socketChannel.socket().setSendBufferSize(8 * 1024);// 设置发送缓存
         socketChannel.socket().setSoTimeout(0);
         socketChannel.socket().setTcpNoDelay(true);
         socketChannel.socket().setKeepAlive(true);
@@ -210,7 +210,7 @@ public class Main_nio {
         Object[] objects = new Object[5];
         objects[0] = false;
         objects[1] = false;
-        objects[2] = ByteBuffer.allocateDirect(1024 * 10);// 创建读取缓冲区
+        objects[2] = ByteBuffer.allocateDirect(1024 * 8);// 创建读取缓冲区
         objects[4] = 0;
         selectionKey.attach(objects);
     }
